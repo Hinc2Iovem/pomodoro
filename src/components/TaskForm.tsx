@@ -16,13 +16,22 @@ export default function TaskForm({ setRerender }: TaskFormTypes) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (taskName.trim()) {
-      addTask(db, { id: Date.now(), name: taskName, description: taskDescription, status: "doing", deadline });
-      setTaskName("");
-      setTaskDescription("");
-      setDeadline("");
-      setRerender(true);
+    if (!taskName.trim().length || !taskDescription.trim().length || !deadline.trim().length) {
+      console.log("fill all the fields, dude");
+      return;
     }
+    addTask(db, {
+      id: Date.now(),
+      name: taskName,
+      description: taskDescription,
+      status: "done",
+      deadline,
+      secondsLeft: 25 * 60,
+    });
+    setTaskName("");
+    setTaskDescription("");
+    setDeadline("");
+    setRerender(true);
   };
 
   return (

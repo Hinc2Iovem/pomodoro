@@ -58,6 +58,39 @@ export function updateTask(db: IDBDatabase, task: TaskTypes) {
   });
 }
 
+export function updateTaskSecondsLeft({
+  db,
+  secondsLeft,
+  taskId,
+}: {
+  db: IDBDatabase;
+  secondsLeft: number;
+  taskId: number;
+}) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction("tasks", "readwrite");
+    const store = transaction.objectStore("tasks");
+    const request = store.getKey(taskId);
+
+    request.onsuccess = () => {
+      const task = request.result as TaskTypes | undefined;
+
+      if (!task) {
+        reject(new Error("no such task"));
+        return;
+      }
+
+      task.secondsLeft = secondsLeft;
+
+      const updatedRequest = store.put(task);
+
+      updatedRequest.onsuccess = () => resolve(task);
+      updatedRequest.onerror = () => reject(updatedRequest.error);
+    };
+    request.onerror = () => reject(request.error);
+  });
+}
+
 export function deleteTask(db: IDBDatabase, id: number) {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("tasks", "readwrite");

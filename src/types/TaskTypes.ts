@@ -7,4 +7,5 @@ export type TaskTypes = {
   name: string;
   description: string;
   deadline: string;
+  secondsLeft: number;
 };

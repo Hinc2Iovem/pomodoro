@@ -8,7 +8,7 @@ export function IndexedDBProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    openDB("tasks", 1)
+    openDB("tasks", 2)
       .then((database) => {
         setDb(database);
         setLoading(false);

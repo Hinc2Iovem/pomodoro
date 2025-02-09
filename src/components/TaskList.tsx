@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useIndexedDB from "../hooks/useIndexedDB";
 import { getTasks } from "../libs/indexDB";
 import { TaskStatusTypes, TaskTypes } from "../types/TaskTypes";
-import TaskItem from "./TaskItem";
+import TaskItem from "./TaskItem/TaskItem";
 
 type TaskListTypes = {
   filterTypes: TaskStatusTypes | "all";
@@ -26,9 +26,9 @@ export default function TaskList({ filterTypes, rerender, setRerender }: TaskLis
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+        gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
         gap: 5,
-        width: "100vh",
+        width: "100%",
         marginTop: 10,
       }}
     >

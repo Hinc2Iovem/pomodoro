@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Filter from "./components/Filter";
-import PomodoroTimer from "./components/PomodoroTimer";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 import { TaskStatusTypes } from "./types/TaskTypes";
@@ -15,6 +14,7 @@ function App() {
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
+        marginInline: "auto",
       }}
     >
       <h1
@@ -34,11 +34,11 @@ function App() {
           display: "flex",
           gap: 20,
           alignSelf: "start",
-          width: "100vh",
+          flexGrow: 1,
+          width: "100%",
         }}
       >
         <TaskForm setRerender={setRerender} />
-        <PomodoroTimer />
       </div>
       <Filter onFilterChange={setFilterState} />
       <TaskList setRerender={setRerender} rerender={rerender} filterTypes={filter} />
